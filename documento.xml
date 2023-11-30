@@ -10,6 +10,10 @@
     <formulario tipo="campotxt"></formulario>
     <formulario tipo="etiqueta" texto="Edad"></formulario>
     <formulario tipo="camponum"></formulario>
+    <formulario tipo="checkbutton" texto="Tengo coche"></formulario>
+    <formulario tipo="checkbutton" texto="Vivo en el extranjero"></formulario>
+    <formulario tipo="checkbutton" texto="Hablo idiomas"></formulario>
     <formulario tipo="boton" texto="Aceptar"></formulario>
     <formulario tipo="boton" texto="Borrar"></formulario>
+    <mensaje tipo="etiqueta" texto="FORMULARIO ENVIADO"></mensaje>
 </interfaz>

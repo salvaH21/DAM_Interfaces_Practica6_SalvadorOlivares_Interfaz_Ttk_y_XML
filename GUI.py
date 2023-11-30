@@ -14,33 +14,50 @@ xml = BeautifulSoup(contenido,"xml")
 #DEFINICION DE FUNCIONES
 def salir():
     raiz.destroy()
-
+    
 def aceptar():
+    def aceptarformulario():
+        marco2.destroy()
+        ventanapartida.add(marco3)
+        for mensaje in xml.find_all("mensaje"):
+            tipo = mensaje.get("tipo")
+            texto = mensaje.get("texto")
+            if tipo == "etiqueta":
+                ttk.Label(marco3,text=texto,background="white").pack(padx=10,pady=10)
+        print("DESTRUCCION")
     opcion = caja.get()
+    #FORMULARIO
     if opcion == "Crear formulario":
         for formulario in xml.find_all("formulario"):
             tipo = formulario.get("tipo")
             texto = formulario.get("texto")
             if tipo == "etiqueta":
-                ttk.Label(marco2,text=texto).pack(padx=10,pady=10)
+                ttk.Label(marco2,text=texto,background="white").pack(padx=10,pady=10)
+            elif tipo == "checkbutton":
+                ttk.Checkbutton(marco2,text=texto).pack(padx=10,pady=10)
             elif tipo == "campotxt":
                 ttk.Entry(marco2).pack(padx=10,pady=10)
             elif tipo == "camponum":
                 ttk.Spinbox(marco2,from_=0,to=100).pack(padx=10,pady=10)
             elif tipo == "boton":
-                if texto == "Aceptar":
-                    ttk.Button(marco2,text=texto).pack(padx=10,pady=10)
-                if texto == "Borrar":
-                    ttk.Button(marco2,text=texto).pack(padx=10,pady=10)
-    elif tipo == "Crear tabla":
-        ttk.Label(marco1,text=texto).pack(padx=10,pady=10)
+                ttk.Button(marco2,text=texto,command=aceptarformulario).pack(padx=10,pady=10)
+    elif opcion == "Crear tabla":
+        marco3.destroy()
+        ventanapartida.add(marco4)
+        for formulario in xml.find_all("formulario"):
+            tipo = formulario.get("tipo")
+            texto = formulario.get("texto")
+            if tipo == "etiqueta":
+                ttk.Label(marco4,text=texto,background="white").pack(padx=10,pady=10)
     print(opcion)
     print("has aceptado")
 
 #VENTANA PARTIDA
 ventanapartida = tk.PanedWindow(raiz,orient=tk.HORIZONTAL)
 marco1 = tk.Frame(ventanapartida)
-marco2 = tk.Frame(ventanapartida)
+marco2 = tk.Frame(ventanapartida,background="white")
+marco3 = tk.Frame(ventanapartida,background="white")
+marco4 = tk.Frame(ventanapartida,background="white")
 ventanapartida.add(marco1)
 ventanapartida.add(marco2)
 ventanapartida.pack(fill=tk.BOTH,expand=True)
@@ -62,19 +79,6 @@ for inicio in xml.find_all("inicio"):
         if texto == "Salir":
             ttk.Button(marco1,text=texto,command=salir).pack(padx=10,pady=10)
 
-#FORMULARIO
-##for formulario in xml.find_all("formulario"):
-##    tipo = formulario.get("tipo")
-##    texto = formulario.get("texto")
-##    if tipo == "etiqueta":
-##        ttk.Label(marco2,text=texto).pack(padx=10,pady=10)
-##    elif tipo == "campotxt":
-##        ttk.Entry(marco2).pack(padx=10,pady=10)
-##    elif tipo == "boton":
-##        if texto == "Aceptar":
-##            ttk.Button(marco1,text=texto,command=aceptar).pack(padx=10,pady=10)
-##        if texto == "Borrar":
-##            ttk.Button(marco1,text=texto,command=salir).pack(padx=10,pady=10)
 #TABLA
 
 
