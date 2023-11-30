@@ -4,4 +4,12 @@
     <inicio tipo="combobox"></inicio> 
     <inicio tipo="boton" texto="Aceptar"></inicio>
     <inicio tipo="boton" texto="Salir"></inicio>
+    <formulario tipo="etiqueta" texto="Nombre"></formulario>
+    <formulario tipo="campotxt"></formulario>
+    <formulario tipo="etiqueta" texto="Apellidos"></formulario>
+    <formulario tipo="campotxt"></formulario>
+    <formulario tipo="etiqueta" texto="Edad"></formulario>
+    <formulario tipo="camponum"></formulario>
+    <formulario tipo="boton" texto="Aceptar"></formulario>
+    <formulario tipo="boton" texto="Borrar"></formulario>
 </interfaz>

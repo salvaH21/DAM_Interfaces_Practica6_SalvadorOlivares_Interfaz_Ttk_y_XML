@@ -7,44 +7,77 @@ from bs4 import BeautifulSoup
 
 raiz = tk.Tk()
 
+archivo = open("documento.xml","r")
+contenido = archivo.read()
+xml = BeautifulSoup(contenido,"xml")
+
 #DEFINICION DE FUNCIONES
 def salir():
     raiz.destroy()
 
 def aceptar():
+    opcion = caja.get()
+    if opcion == "Crear formulario":
+        for formulario in xml.find_all("formulario"):
+            tipo = formulario.get("tipo")
+            texto = formulario.get("texto")
+            if tipo == "etiqueta":
+                ttk.Label(marco2,text=texto).pack(padx=10,pady=10)
+            elif tipo == "campotxt":
+                ttk.Entry(marco2).pack(padx=10,pady=10)
+            elif tipo == "camponum":
+                ttk.Spinbox(marco2,from_=0,to=100).pack(padx=10,pady=10)
+            elif tipo == "boton":
+                if texto == "Aceptar":
+                    ttk.Button(marco2,text=texto).pack(padx=10,pady=10)
+                if texto == "Borrar":
+                    ttk.Button(marco2,text=texto).pack(padx=10,pady=10)
+    elif tipo == "Crear tabla":
+        ttk.Label(marco1,text=texto).pack(padx=10,pady=10)
+    print(opcion)
     print("has aceptado")
 
+#VENTANA PARTIDA
+ventanapartida = tk.PanedWindow(raiz,orient=tk.HORIZONTAL)
+marco1 = tk.Frame(ventanapartida)
+marco2 = tk.Frame(ventanapartida)
+ventanapartida.add(marco1)
+ventanapartida.add(marco2)
+ventanapartida.pack(fill=tk.BOTH,expand=True)
 
-archivo = open("documento.xml","r")
-contenido = archivo.read()
-xml = BeautifulSoup(contenido,"xml")
+#DECLARACIONES
+caja = ttk.Combobox(marco1,values=['Crear formulario','Crear tabla'])
+
+#INICIO
 for inicio in xml.find_all("inicio"):
     tipo = inicio.get("tipo")
     texto = inicio.get("texto")
-    funcion = inicio.get("funcion")
     if tipo == "combobox":
-        ttk.Combobox(raiz,values=['Crear formulario','Crear tabla','Salir']).pack(padx=10,pady=10)
+        caja.pack(padx=10,pady=10)
     elif tipo == "etiqueta":
-        ttk.Label(raiz,text=texto).pack(padx=10,pady=10)
+        ttk.Label(marco1,text=texto).pack(padx=10,pady=10)
     elif tipo == "boton":
         if texto == "Aceptar":
-            ttk.Button(raiz,text=texto,command=aceptar).pack(padx=10,pady=10)
+            ttk.Button(marco1,text=texto,command=aceptar).pack(padx=10,pady=10)
         if texto == "Salir":
-            ttk.Button(raiz,text=texto,command=salir).pack(padx=10,pady=10)
+            ttk.Button(marco1,text=texto,command=salir).pack(padx=10,pady=10)
 
-#INICIO:un combobox en la raiz con las dos opciones y un boton para aceptar alguna de ellas
-##ttk.Label(raiz,text="Escoge la opción que quieras realizar").pack(padx=10,pady=10)
-##ttk.Combobox(raiz,values=['Crear formulario','Crear tabla','Salir']).pack(padx=10,pady=10)
-##ttk.Button(raiz,text="Aceptar").pack(padx=10,pady=10)
-#CREAR EL FORMULARIO
+#FORMULARIO
+##for formulario in xml.find_all("formulario"):
+##    tipo = formulario.get("tipo")
+##    texto = formulario.get("texto")
+##    if tipo == "etiqueta":
+##        ttk.Label(marco2,text=texto).pack(padx=10,pady=10)
+##    elif tipo == "campotxt":
+##        ttk.Entry(marco2).pack(padx=10,pady=10)
+##    elif tipo == "boton":
+##        if texto == "Aceptar":
+##            ttk.Button(marco1,text=texto,command=aceptar).pack(padx=10,pady=10)
+##        if texto == "Borrar":
+##            ttk.Button(marco1,text=texto,command=salir).pack(padx=10,pady=10)
+#TABLA
 
-#CREAR UNA TABLA
 
-#FRAMES
-formulario = tk.Frame(raiz,padx=50,pady=50)
-tk.Label(formulario,text="Hola Salva desde un Frame").pack(padx=10,pady=10)
-tk.Button(formulario,text="Pulsar").pack(padx=10,pady=10)
-formulario.pack()
 #DIMENSIONES VENTANA RAIZ
 anchuraventana = 300
 alturaventana = 200
