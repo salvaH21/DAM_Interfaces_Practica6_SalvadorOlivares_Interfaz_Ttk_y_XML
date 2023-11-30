@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interfaz>
+    <inicio tipo="etiqueta" texto="Escoge la opcion que quieras realizar"></inicio>
+    <inicio tipo="combobox"></inicio> 
+    <inicio tipo="boton" texto="Aceptar"></inicio>
+    <inicio tipo="boton" texto="Salir"></inicio>
+</interfaz>
