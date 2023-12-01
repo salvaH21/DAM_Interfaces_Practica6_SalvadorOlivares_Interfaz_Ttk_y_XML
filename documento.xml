@@ -16,4 +16,12 @@
     <formulario tipo="boton" texto="Aceptar"></formulario>
     <formulario tipo="boton" texto="Borrar"></formulario>
     <mensaje tipo="etiqueta" texto="FORMULARIO ENVIADO"></mensaje>
+    <tabla tipo="etiqueta" texto="PELICULAS"></tabla>
+    <tabla tipo="cabecera" cl1="Titulo" cl2="Genero" cl3="Fecha"></tabla>
+    <tabla tipo="fila" ID="1" dato1="Matrix" dato2="accion" dato3="2000"></tabla>
+    <tabla tipo="fila" ID="2" dato1="it" dato2="terror" dato3="1980"></tabla>
+    <tabla tipo="etiqueta" texto="NOMBRES"></tabla>
+    <tabla tipo="cabecera" cl1="Nombre" cl2="Apellidos" cl3="Edad"></tabla>
+    <tabla tipo="fila" ID="1" dato1="Salva" dato2="Olivares" dato3="33"></tabla>
+    <tabla tipo="fila" ID="2" dato1="Marisa" dato2="Martinez" dato3="30"></tabla>
 </interfaz>

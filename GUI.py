@@ -1,6 +1,3 @@
-##Práctica 6:
-##Crear una práctica, que en primer lugar use widgets de la familia Ttk,
-##y que además se gestione o bien con un txt, o bien con un XML
 import tkinter as tk
 from tkinter import ttk
 from bs4 import BeautifulSoup
@@ -41,14 +38,31 @@ def aceptar():
                 ttk.Spinbox(marco2,from_=0,to=100).pack(padx=10,pady=10)
             elif tipo == "boton":
                 ttk.Button(marco2,text=texto,command=aceptarformulario).pack(padx=10,pady=10)
+    #TABLA
     elif opcion == "Crear tabla":
         marco3.destroy()
         ventanapartida.add(marco4)
-        for formulario in xml.find_all("formulario"):
-            tipo = formulario.get("tipo")
-            texto = formulario.get("texto")
+        for tabla in xml.find_all("tabla"):
+            tipo = tabla.get("tipo")
+            texto = tabla.get("texto")
+            columna1 = tabla.get("cl1")
+            columna2 = tabla.get("cl2")
+            columna3 = tabla.get("cl3")
+            identificador = tabla.get("ID")
+            dato1 = tabla.get("dato1")
+            dato2 = tabla.get("dato2")
+            dato3 = tabla.get("dato3")
             if tipo == "etiqueta":
                 ttk.Label(marco4,text=texto,background="white").pack(padx=10,pady=10)
+            if tipo == "cabecera":
+                arbol = ttk.Treeview(marco4,columns=('columna1','columna2','columna3'))
+                arbol.heading("#0",text="ID")
+                arbol.heading("columna1",text=columna1)
+                arbol.heading("columna2",text=columna2)
+                arbol.heading("columna3",text=columna3)
+            if tipo == "fila":           
+                arbol.insert('','0',text=identificador,values=(dato1,dato2,dato3))
+                arbol.pack(padx=10,pady=10)
     print(opcion)
     print("has aceptado")
 
@@ -79,7 +93,7 @@ for inicio in xml.find_all("inicio"):
         if texto == "Salir":
             ttk.Button(marco1,text=texto,command=salir).pack(padx=10,pady=10)
 
-#TABLA
+
 
 
 #DIMENSIONES VENTANA RAIZ
@@ -91,5 +105,10 @@ esquinax = int(anchurapantalla/2 - anchuraventana/2)
 esquinay = int(alturapantalla/2 - alturaventana/2)
 raiz.geometry(str(anchuraventana)+"x"+str(alturaventana)+"+"+str(esquinax)+"+"+str(esquinay))
 
+#TITULO DE LA VENTANA
+raiz.title("Interfaz ttk y XML")
+
+#ICONO
+raiz.iconbitmap("icono.ico")
 
 raiz.mainloop()
